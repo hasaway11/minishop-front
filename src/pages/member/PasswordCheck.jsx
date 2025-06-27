@@ -1,0 +1,9 @@
+import React from 'react'
+
+function PasswordCheck() {
+  return (
+    <div>PasswordCheck</div>
+  )
+}
+
+export default PasswordCheck

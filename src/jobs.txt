@@ -1,0 +1,21 @@
+/				MiniShop.jsx
+/account/login			Login.jsx
+/account/logout			Log
+/account/search/id		
+/account/search/password
+/account/signup
+
+/mypage
+/mypage/orders
+/mypage/review/writable
+/mypage/review/writed
+
+
+/cart/cartList
+
+/product
+
+/seller/product/register
+/seller/product/modify
+/seller/product
+/seller/order

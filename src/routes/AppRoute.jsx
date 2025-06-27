@@ -1,0 +1,54 @@
+import { Route, Routes } from 'react-router-dom'
+
+import PublicRoute from './PublicRoute'
+import PrivateRoute from './PrivateRoute'
+import MemberRoute from './MemberRoute'
+import SellerRoute from './SellerlRoute'
+
+import MiniShop from '../pages/MiniShop'
+import Login from '../pages/account/Login';
+import SearchId from '../pages/account/SearchId';
+import SearchPassword from '../pages/account/SearchPassword';
+import MemberSignup from '../pages/account/MemberSignup';
+import SellerSignup from '../pages/account/SellerSignup';
+
+import CartList from '../pages/cart/CartList'
+
+import PasswordCheck from '../pages/member/PasswordCheck'
+import MyOrder from '../pages/member/MyOrder'
+import MyPage from '../pages/member/MyPage'
+import ReviewWritable from '../pages/member/ReviewWritable'
+import ReviewWrited from '../pages/member/ReviewWrited'
+
+import Modify from '../pages/product/Modify'
+import View from '../pages/product/View'
+import SellerView from '../pages/product/SellerView'
+import Register from '../pages/product/Register'
+
+import Order from '../pages/seller/Order'
+
+function AppRoute() {
+  return (
+    <Routes>
+      <Route path="/" element={<MiniShop/>} />
+      <Route path="/account/member/signup" element={<PublicRoute element={<MemberSignup/>} />} />
+      <Route path="/account/seller/signup" element={<PublicRoute element={<SellerSignup/>} />} />
+      <Route path="/account/login" element={<PublicRoute element={<Login/>} />} />
+      <Route path="/account/search/id" element={<PublicRoute element={<SearchId/>} />} />
+      <Route path="/account/search/password" element={<PublicRoute element={<SearchPassword/>} />} />
+      <Route path="/mypage/check" element={<PrivateRoute element={<PasswordCheck/>} />} />
+      <Route path="/mypage/read" element={<PrivateRoute element={<MyPage/>} />} />
+      <Route path="/mypage/order" element={<MemberRoute element={<MyOrder/>} />} />
+      <Route path="/mypage/review/writable" element={<MemberRoute element={<ReviewWritable/>} />} />
+      <Route path="/mypage/review/writed" element={<MemberRoute element={<ReviewWrited/>} />} />
+      <Route path="/cart/cartlist" element={<MemberRoute element={<CartList/>} />} />
+      <Route path="/product/view" element={<View/>} />
+      <Route path="/seller/product/register" element={<SellerRoute element={<Register/>} />} />
+      <Route path="/seller/product/modify" element={<SellerRoute element={<Modify/>} />} />
+      <Route path="/seller/product/view" element={<SellerRoute element={<SellerView/>} />} />
+      <Route path="/seller/order" element={<SellerRoute element={<Order/>} />} />
+    </Routes>
+  )
+}
+
+export default AppRoute
