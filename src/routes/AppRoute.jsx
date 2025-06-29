@@ -1,37 +1,40 @@
 import { Route, Routes } from 'react-router-dom'
 
-import PublicRoute from './PublicRoute'
-import PrivateRoute from './PrivateRoute'
-import MemberRoute from './MemberRoute'
-import SellerRoute from './SellerlRoute'
+import PublicRoute from './PublicRoute';
+import MemberRoute from './MemberRoute';
+import SellerRoute from './SellerlRoute';
+import PrivateRoute from './PrivateRoute';
 
-import MiniShop from '../pages/MiniShop'
+import MiniShop from '../pages/MiniShop';
 import Login from '../pages/account/Login';
 import SearchId from '../pages/account/SearchId';
-import SearchPassword from '../pages/account/SearchPassword';
 import MemberSignup from '../pages/account/MemberSignup';
 import SellerSignup from '../pages/account/SellerSignup';
+import SearchPassword from '../pages/account/SearchPassword';
+import SellerPreSignupEmailAuth from '../pages/account/SellerPreSignupEmailAuth';
 
-import CartList from '../pages/cart/CartList'
 
-import PasswordCheck from '../pages/member/PasswordCheck'
-import MyOrder from '../pages/member/MyOrder'
-import MyPage from '../pages/member/MyPage'
-import ReviewWritable from '../pages/member/ReviewWritable'
-import ReviewWrited from '../pages/member/ReviewWrited'
+import CartList from '../pages/cart/CartList';
 
-import Modify from '../pages/product/Modify'
-import View from '../pages/product/View'
-import SellerView from '../pages/product/SellerView'
-import Register from '../pages/product/Register'
+import MyPage from '../pages/member/MyPage';
+import MyOrder from '../pages/member/MyOrder';
+import ReviewWrited from '../pages/member/ReviewWrited';
+import PasswordCheck from '../pages/member/PasswordCheck';
+import ReviewWritable from '../pages/member/ReviewWritable';
 
-import Order from '../pages/seller/Order'
+import View from '../pages/product/View';
+import Modify from '../pages/product/Modify';
+import Register from '../pages/product/Register';
+import SellerView from '../pages/product/SellerView';
+
+import Order from '../pages/seller/Order';
 
 function AppRoute() {
   return (
     <Routes>
       <Route path="/" element={<MiniShop/>} />
       <Route path="/account/member/signup" element={<PublicRoute element={<MemberSignup/>} />} />
+      <Route path="/account/seller/signup-check" element={<PublicRoute element={<SellerPreSignupEmailAuth/>} />} />
       <Route path="/account/seller/signup" element={<PublicRoute element={<SellerSignup/>} />} />
       <Route path="/account/login" element={<PublicRoute element={<Login/>} />} />
       <Route path="/account/search/id" element={<PublicRoute element={<SearchId/>} />} />

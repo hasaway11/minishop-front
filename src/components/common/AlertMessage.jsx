@@ -1,11 +1,10 @@
 import { Alert } from 'react-bootstrap'
-import { AsyncStatus } from '../../utils/constants'
 
-function AlertMessage({status, variant, message}) {
+function AlertMessage({visible, variant, message}) {
   return (
     <>
-      {status!==AsyncStatus.FAIL && <div style={{height:58}}></div>}
-      {status===AsyncStatus.FAIL && <Alert variant={variant}>{message}</Alert>}
+      {visible && <div style={{height:58}}></div>}
+      {visible && <Alert variant={variant}>{message}</Alert>}
     </>
   )
 }

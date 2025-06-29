@@ -44,7 +44,7 @@ function Login() {
   return (
     <div>
       <h1>로그인</h1>
-      <AlertMessage status={status} variant='danger' message="로그인 실패 : 이메일 또는 비밀번호를 다시 확인하세요" />
+      <AlertMessage visible={status===AsyncStatus.FAIL} variant='danger' message="로그인 실패 : 이메일 또는 비밀번호를 다시 확인하세요" />
       <div style={{height:200}}>
         <TextField label='아이디' name="username" {...vUsername} />
         <TextField type='password' label='비밀번호' name="password" {...vPassword}/>
