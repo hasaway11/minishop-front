@@ -4,7 +4,7 @@ import { AsyncStatus } from '../../utils/constants'
 import { memberSignup } from "../../utils/account-api";
 
 import useEmail from "../../hooks/useEmail";
-import usePhoto from "../../hooks/usePhoto";
+import useImage from "../../hooks/useImage";
 import useInput from "../../hooks/useInput";
 import useUsername from '../../hooks/useUsername'
 import usePassword from "../../hooks/usePassword";
@@ -18,7 +18,7 @@ function MemberSignup() {
   const navigate = useNavigate();
   const [status, setStatus] = useState(AsyncStatus.IDLE);
 
-  const vProfile = usePhoto();
+  const vProfile = useImage();
   const vUsername = useUsername(true);
   const vPassword = usePassword()
   const vConfirmPassword = useConfirmPassword(vPassword);

@@ -18,7 +18,7 @@ function Nav() {
         <ul>
           <li><Link to="/" style={{color:'white'}}>HOME</Link></li>
           <li><Link to="/account/member/signup">회원 가입</Link></li>
-          <li><Link to="/account/seller/signup">셀러 회원 가입</Link></li>
+          <li><Link to="/account/seller/signup-check">셀러 회원 가입</Link></li>
           <li><Link to="/account/login">로그인</Link></li>
           <li><Link to="/account/search/id">아이디 찾기</Link></li>
           <li><Link to="/account/search/password">비밀번호 찾기</Link></li>

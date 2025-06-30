@@ -74,3 +74,29 @@ import { useAuthStore } from '../store/useAuthStore';
 
 clearAuthData();
 useAuthStore.getState().clearAuth();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+버그 리포트
+1. 판매 회원 가입 후 /account/login으로 주소는 바뀌는데 화면이 갱신되지 않음(흰 화면)

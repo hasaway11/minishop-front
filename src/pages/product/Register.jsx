@@ -1,16 +1,22 @@
+import 'react-quill-new/dist/quill.snow.css';
+import './Register.css';
+
 import { useState } from "react";
 import ImageSelector from "../../components/product/ImageSelector"
 import useInput from "../../hooks/useInput";
 import TextField from "../../components/common/TextField";
 import { registerProduct } from "../../utils/product-api ";
 import { useNavigate } from "react-router-dom";
-import { AsyncStatus } from "../../utils/constants";
+import { AsyncStatus, modules } from "../../utils/constants";
+import ReactQuill from "react-quill-new";
+import BlockButton from "../../components/common/BlockButton";
 
 
 function Register() {
   const navigate = useNavigate();
   const [status, setStatus] = useState(AsyncStatus.IDLE);
   const [images, setImages] = useState([null, null, null]);
+  const [content, setContent] = useState('');
 
   const vName = useInput();
   const vPrice = useInput();
@@ -62,7 +68,7 @@ function Register() {
       <TextField label='가격' name='price' {...vPrice} />
       <TextField label='재고' name='stock' {...vStock} />
       <TextField label='카테고리' name='category' {...vCategory} />
-      <ReactQuill theme="snow" name="content" modules={{modules}}  value={content} onChange={(value)=>setContent(value)}/>
+      <ReactQuill theme="snow" name="content" modules={modules}  value={content} onChange={(value)=>setContent(value)}/>
       <BlockButton label={isSubmitting? "등록 중..." : "상품 등록"} onClick={handleRegister} styleName='primary' disabled={isSubmitting}/>
     </div>
   )

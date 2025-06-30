@@ -1,6 +1,6 @@
 import  { useCallback, useState } from 'react'
 
-function use() {
+function useImage() {
   const [value, setValue] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
 

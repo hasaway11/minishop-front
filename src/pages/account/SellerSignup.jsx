@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AsyncStatus } from "../../utils/constants";
 import { sellerSignup } from "../../utils/account-api";
 
 import useEmail from "../../hooks/useEmail";
@@ -9,7 +10,7 @@ import useUsername from "../../hooks/useUsername";
 import TextField from "../../components/common/TextField";
 import BlockButton from "../../components/common/BlockButton";
 import useConfirmPassword from "../../hooks/useConfirmPassword";
-import { AsyncStatus } from "../../utils/constants";
+import AlertMessage from "../../components/common/AlertMessage";
 
 function SellerSignup() {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ function SellerSignup() {
     const r7 = vAddress.onBlur();
 
     if (!(r1 && r2 && r3 && r4 && r5 && r6 && r7)) {
-      setStatus(AsyncStatus.FAIL);
+      setStatus(AsyncStatus.IDLE);
       return;
     }    
 
@@ -49,10 +50,10 @@ function SellerSignup() {
       setStatus(AsyncStatus.SUCCESS);
       navigate("/account/login");
     } catch(err) {
-      if(err.response.status===403) {
+      if(err.response.status===400) {
         setStatus(AsyncStatus.IDLE);
-        alert('이메일 인증이 필요합니다');
-        navigate('/account/seller/signup-check');
+        alert('이메일 인증이 필요합니다. 이미 인증하셨다면 인증에 사용된 이메일을 입력하세요');
+        vEmail.reset();
       } else {
         setStatus(AsyncStatus.FAIL);
         console.log(err);
@@ -65,8 +66,8 @@ function SellerSignup() {
       <h1>판매 회원 가입</h1>
       <AlertMessage visible={status===AsyncStatus.FAIL} variant='danger' message="회원 가입에 실패했습니다" />
       <TextField label="아이디" name="username" {...vUsername} />
-      <TextField label="비밀번호" name="password" {...vPassword} />
-      <TextField label="비밀번호 확인" name="confirm-password" {...vConfirmPassword} />
+      <TextField type="password" label="비밀번호" name="password" {...vPassword} />
+      <TextField type="password" label="비밀번호 확인" name="confirm-password" {...vConfirmPassword} />
       <TextField label="이메일" name="email" {...vEmail} />
       <TextField label="사업체 이름" name="company-name" {...vCompanyName} />
       <TextField label="대표자 이름" name="representative" {...vRepresentative} />

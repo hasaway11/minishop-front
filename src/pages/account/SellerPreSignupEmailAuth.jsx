@@ -17,11 +17,11 @@ function SellerPreSignupCheck() {
   const [verifyStatus, setVerifyStatus] = useState(AsyncStatus.IDLE);
   const navigate = useNavigate();
 
-  const isRequestSuccess = requestStatus===AsyncStatus.SUCCESS;
-  const isVerifyFail = verifyStatus===AsyncStatus.FAIL;
+  // const isRequestSuccess = requestStatus===AsyncStatus.SUCCESS;
+  // const isVerifyFail = verifyStatus===AsyncStatus.FAIL;
 
   const handleRequest=async()=>{
-    if(isSubmitting) return;
+    if(requestStatus===AsyncStatus.SUBMITTING) return;
     setRequestStatus(AsyncStatus.SUBMITTING);
     try {
       await requestVerifyCode({email:vEmail.value});
@@ -33,7 +33,7 @@ function SellerPreSignupCheck() {
   }
 
   const verifyCode=async()=>{
-    if(isSubmitting) return;
+    if(verifyStatus===AsyncStatus.SUBMITTING) return;
     setVerifyStatus(AsyncStatus.SUBMITTING);    
     try {
       await checkVerifyCode({email:vEmail.value, code:vVerificationCode.value});
@@ -47,19 +47,23 @@ function SellerPreSignupCheck() {
 
   return (
     <div>
-      <h1>이메일 인증</h1>
-      <AlertMessage visible={isVerifyFail} variant='danger' message="인증코드를 확인하지 못했습니다" />
-      {!isRequestSuccess && (
+      {!(requestStatus===AsyncStatus.SUCCESS) && (<div>
+        <h1>이메일을 입력해 확인코드를 받으세요</h1>
+        <AlertMessage visible={requestStatus===AsyncStatus.FAIL} variant='danger' message="확인코드를 신청하지 못했습니다" />
         <div>
           <TextField name="email" label="이메일:" {...vEmail} />
           <BlockButton label="이메일 확인" onClick={handleRequest} styleName='primary'/>
         </div>
+      </div>
       )}
-      {isRequestSuccess && (
+      {(requestStatus===AsyncStatus.SUCCESS) && (<div>
+        <h1>확인코드를 인증하세요</h1>
+        <AlertMessage visible={verifyStatus===AsyncStatus.FAIL} variant='danger' message="확인코드를 인증하지 못했습니다" />
         <div>
-          <TextField name="code" label="인증코드:" {...vVerificationCode} />
-          <BlockButton label="인증코드 확인" onClick={verifyCode} styleName='dark' />
+          <TextField name="code" label="확인코드:" {...vVerificationCode} />
+          <BlockButton label="확인코드 인증" onClick={verifyCode} styleName='dark' />
         </div>
+      </div>
       )}
     </div>
   )
