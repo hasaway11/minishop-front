@@ -47,6 +47,7 @@ function Register() {
         formData.append('images', image);
     } 
     formData.append('name', vName.value);
+    formData.append('info', content);
     formData.append('price', vPrice.value);
     formData.append('stock', vStock.value);
     formData.append('category', vCategory.value);
