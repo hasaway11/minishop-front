@@ -21,6 +21,7 @@ function App() {
 
   // 로컬 스토리지의 인증 정보를 store에 복사
   const {error, loading} = useAuthInit();
+  
   return (
     <div className="App">
       <Header />

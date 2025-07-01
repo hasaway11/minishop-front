@@ -15,4 +15,4 @@ export const modules = {
 export const convertToInt=(param, result)=>{
   const num = parseInt(param, 10);
   return (num >= 1) ? num : result;
-}
+};

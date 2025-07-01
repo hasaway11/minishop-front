@@ -5,11 +5,14 @@ import { useState } from "react";
 import ImageSelector from "../../components/product/ImageSelector"
 import useInput from "../../hooks/useInput";
 import TextField from "../../components/common/TextField";
-import { registerProduct } from "../../utils/product-api ";
+import { readMinorCategory, registerProduct } from "../../utils/product-api ";
 import { useNavigate } from "react-router-dom";
 import { AsyncStatus, modules } from "../../utils/constants";
 import ReactQuill from "react-quill-new";
 import BlockButton from "../../components/common/BlockButton";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
+import useSWR from 'swr';
+import { Alert } from 'react-bootstrap';
 
 
 function Register() {
@@ -17,6 +20,7 @@ function Register() {
   const [status, setStatus] = useState(AsyncStatus.IDLE);
   const [images, setImages] = useState([null, null, null]);
   const [content, setContent] = useState('');
+  const {data, error, isLoading } = useSWR('category', ()=>readMinorCategory(), { revalidateOnFocus: false} );
 
   const vName = useInput();
   const vPrice = useInput();
@@ -31,6 +35,7 @@ function Register() {
 
     if(images[0]===null) {
       alert('이미지를 1개이상 등록하세요');
+      setStatus(AsyncStatus.IDLE);
       return;
     }
 
@@ -38,8 +43,10 @@ function Register() {
     const r2 = vPrice.onBlur();
     const r3 = vStock.onBlur();
     const r4 = vCategory.onBlur();
-    if(!(r1 && r2 && r3 && r4)) 
+    if(!(r1 && r2 && r3 && r4)) {
+      setStatus(AsyncStatus.IDLE);
       return;
+    }
 
     const formData = new FormData();
     for(const image of images) {
@@ -51,7 +58,6 @@ function Register() {
     formData.append('price', vPrice.value);
     formData.append('stock', vStock.value);
     formData.append('category', vCategory.value);
-
     try {
       await registerProduct(formData);
       setStatus(AsyncStatus.SUCCESS);
@@ -62,13 +68,25 @@ function Register() {
     }
   }
 
+  if(isLoading) return <LoadingSpinner />
+  if(error) return <Alert variant='danger'>서버가 응답하지 않습니다</Alert>
+
   return (
     <div>
       <ImageSelector images={images} setImages={setImages}/>
       <TextField label='상품명' name='title' {...vName} />
       <TextField label='가격' name='price' {...vPrice} />
       <TextField label='재고' name='stock' {...vStock} />
-      <TextField label='카테고리' name='category' {...vCategory} />
+      <div className="mt-3 mb-3">
+        <label htmlFor='category' className='form-label'>카테고리:</label>
+        <select className="form-control" onChange={vCategory.onChange} onBlur={vCategory.onBlur}>
+          <option disabled selected>카테고리를 선택하세요</option>
+          {
+            data.data.map(c=><option value={c.id}>{c.name}</option>)
+          }
+        </select>
+        {vCategory.message!=='' && <span style={{color:'red'}}>{vCategory.message}</span>}
+      </div>
       <ReactQuill theme="snow" name="content" modules={modules}  value={content} onChange={(value)=>setContent(value)}/>
       <BlockButton label={isSubmitting? "등록 중..." : "상품 등록"} onClick={handleRegister} styleName='primary' disabled={isSubmitting}/>
     </div>

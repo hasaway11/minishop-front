@@ -3,13 +3,16 @@ import { convertToInt } from "../../utils/constants";
 import useSWR from "swr";
 import ReviewList from "../../components/review/ReviewList";
 import { Alert } from "bootstrap";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
+import { readProduct } from "../../utils/product-api ";
+import DOMPurify from 'dompurify';
 
 function View() {
   const [params] = useSearchParams();
-  let productId = convertToInt(params.get('product_id'), null);
-  const {data, error, isLoading } = useSWR(['productId', productId], ()=>read(pno), { revalidateOnFocus: false} );
+  let id = convertToInt(params.get('id'), null);
+  const {data, error, isLoading } = useSWR(['product', id], ()=>readProduct(id), { revalidateOnFocus: false} );
 
-  if (!productId) return <Navigate to="/" replace />;
+  if (!id) return <Navigate to="/" replace />;
   if(isLoading)  return <LoadingSpinner />;
   if(error) return <Alert variant='danger'>선택하신 상품이 존재하지 않습니다</Alert>;
 
