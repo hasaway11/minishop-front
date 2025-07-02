@@ -43,7 +43,7 @@ function Nav() {
       return (
         <nav>
           <ul>
-            <li><Link to="#">내 상품</Link></li>
+            <li><Link to="/seller/product/list">내 상품</Link></li>
             <li><Link to="/seller/product/register">상품등록</Link></li>
             <li><Link to="/seller/order">내 주문</Link></li>
             <li><Link to="#" onClick={handleLogout}>로그아웃</Link></li>

@@ -1,16 +1,17 @@
 import axios from "axios";
 import { useAuthStore } from "../stores/useAuthStore";
-import { getRefreshToken, updateToken } from "../stores/authStorage";
+import { getRefreshToken, updateAccessToken } from "../stores/authStorage";
 import { navigate } from "./navigate";
+import { tokenRefresh } from "../utils/account-api";
 
 const api = axios.create({baseURL: "http://localhost:8080"});
 
 api.interceptors.request.use(
   (config)=>{
-    console.log("=======================================")
     const token = useAuthStore.getState().accessToken;
-    if(token) 
+    if(token) {
       config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
   },
   (err)=>Promise.reject(err)
@@ -20,21 +21,20 @@ api.interceptors.response.use(
   (res)=>res,
   async (err)=>{
     const originalRequest= err.config;
-    
     // 이미 재시도한 요청이라면 바로 실패 처리
     if(err.response.status == 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
         const refreshToken = getRefreshToken();
-        if(!refreshToken)
-          throw new Error('no refresh token');
-        const res = await axios.post('/api/refresh', {refreshToken});
-        const newAccessToken = res.data.accessToken;
-        const newRefreshToken = res.data.refreshToken;
+        if(!refreshToken) {
+          navigate('/account/login');
+        }
+        const res = await tokenRefresh(refreshToken);
+        const newAccessToken = res.data;
 
         // 갱신된 토큰 저장
-        updateToken({accessToken:newAccessToken, refreshToken:newRefreshToken});
-        useAuthStore.getState().updateToken({accessToken:newAccessToken, refreshToken:newRefreshToken});
+        updateAccessToken(newAccessToken);
+        useAuthStore.getState().updateAccessToken(newAccessToken);
 
         // 원래 요청 재시도
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;

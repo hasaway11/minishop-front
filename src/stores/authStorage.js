@@ -29,10 +29,7 @@ export const saveAuthData = ({ accessToken, refreshToken, username, role }) => {
 export const getRefreshToken = ()=>localStorage.getItem(STORAGE_KEY.REFRESH_TOKEN);
 
 // 4. Token 갱신
-export const updateToken = ({accessToken, refreshToken})=>{
-  localStorage.setItem(STORAGE_KEY.ACCESS_TOKEN, accessToken);
-  localStorage.setItem(STORAGE_KEY.REFRESH_TOKEN, refreshToken);
-}
+export const updateAccessToken = (accessToken)=>localStorage.setItem(STORAGE_KEY.ACCESS_TOKEN, accessToken);
 
 // 5. 전체 인증 정보 삭제 (로그아웃 시)
 export const clearAuthData = ()=>Object.values(STORAGE_KEY).forEach((key)=>localStorage.removeItem(key));

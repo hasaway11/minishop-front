@@ -10,7 +10,7 @@ export const useAuthStore = create(set=>({
     set({ accessToken, refreshToken, username, role});
   },
 
-  updateToken: ({accessToken, refreshToken}) => set({ accessToken, refreshToken }),
+  updateAccessToken: (accessToken) => set({accessToken}),
 
   clearAuth:()=>set({ accessToken:null, refreshToken:null, username:null, role:null }),
 

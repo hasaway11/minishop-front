@@ -6,6 +6,8 @@ export const readMinorCategory = ()=>api.get('/api/categories/minor');
 
 export const readProducts = (pageno)=>api.get(`/api/products?pageno=${pageno}`)
 
+export const readProductsBySeller = (pageno, seller)=>api.get(`/api/products?pageno=${pageno}&seller=${seller}`)
+
 export const readProduct = (id)=>api.get(`/api/products/${id}`)
 
 export const readProductBySeller = (seller, pageno)=>api.get(`/api/products/${seller}?pageno=${pageno}`)

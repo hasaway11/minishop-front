@@ -9,13 +9,16 @@ export const useAuthInit = () => {
   const [error, setError] = useState(null);
 
   useEffect(()=>{
+    setLoading(true);
     const data = loadAuthData();
+    console.log("=================================");
+    console.log(data);
     if (data)
       setAuth(data);
 
     // 액세스 토큰이 있을 경우에만 체크
     if(data && data.accessToken) {
-      setLoading(true);
+      console.log("토큰 확인 :", data);
       api.get('/api/check').then(res=>{
         // 토큰이 현재 유효함. 할일 없음
         console.log("유효")
@@ -33,10 +36,10 @@ export const useAuthInit = () => {
           console.log("제너럴 오류")
         }
       }).finally(()=>{
-        console.log("finally");
         setLoading(false);
       })
-    }
+    } else
+      setLoading(false);
   }, []);
 
   return {error, loading};

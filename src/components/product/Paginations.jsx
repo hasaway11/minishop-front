@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Pagination } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-function Paginations({pageno, totalcount, pagesize, blocksize}) {
+function Paginations({pageno, totalcount, pagesize, blocksize, url}) {
   const [pages, setPages] = useState(null);
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ function Paginations({pageno, totalcount, pagesize, blocksize}) {
     setPages({prev, pageItem, next});
   }, []);
 
-  const move = (pageno) => navigate(`/?pageno=${pageno}`);
+  const move = (pageno) => navigate(`${url}?pageno=${pageno}`);
 
   if(pages===null) return; 
   const {prev, pageItem, next} = pages;

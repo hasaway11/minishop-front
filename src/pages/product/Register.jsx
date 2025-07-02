@@ -79,10 +79,10 @@ function Register() {
       <TextField label='재고' name='stock' {...vStock} />
       <div className="mt-3 mb-3">
         <label htmlFor='category' className='form-label'>카테고리:</label>
-        <select className="form-control" onChange={vCategory.onChange} onBlur={vCategory.onBlur}>
-          <option disabled selected>카테고리를 선택하세요</option>
+        <select className="form-control" onChange={vCategory.onChange} onBlur={vCategory.onBlur} defaultValue="">
+          <option value="" disabled>카테고리를 선택하세요</option>
           {
-            data.data.map(c=><option value={c.id}>{c.name}</option>)
+            data.data.map(c=><option key={c.id} value={c.id}>{c.name}</option>)
           }
         </select>
         {vCategory.message!=='' && <span style={{color:'red'}}>{vCategory.message}</span>}

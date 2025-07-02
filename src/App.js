@@ -9,7 +9,6 @@ import Nav from './fragments/Nav';
 import Aside from './fragments/Aside';
 import Footer from './fragments/Footer';
 import AppRoute from './routes/AppRoute';
-import { Alert } from 'react-bootstrap';
 
 function App() {
   const navigate = useNavigate();
@@ -21,6 +20,8 @@ function App() {
 
   // 로컬 스토리지의 인증 정보를 store에 복사
   const {error, loading} = useAuthInit();
+
+  if(loading) return <div>⏳ 로그인 상태 확인 중...</div>;
   
   return (
     <div className="App">
@@ -29,8 +30,6 @@ function App() {
       <main>
         <Aside />
         <section>
-          {loading && <div>⏳ 로그인 상태 확인 중...</div>}
-          {error && <Alert variant='danger'>{error}</Alert>}
           <AppRoute />
         </section>
         <Aside />
