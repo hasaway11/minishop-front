@@ -1,11 +1,12 @@
-import { Navigate, useSearchParams } from "react-router-dom";
+import { Alert } from "react-bootstrap";
 import { convertToInt } from "../../utils/constants";
+import { readProduct } from "../../utils/product-api";
+import { Navigate, useSearchParams } from "react-router-dom";
+
 import useSWR from "swr";
+import DOMPurify from 'dompurify';
 import ReviewList from "../../components/review/ReviewList";
 import LoadingSpinner from "../../components/common/LoadingSpinner";
-import { readProduct } from "../../utils/product-api ";
-import DOMPurify from 'dompurify';
-import { Alert } from "react-bootstrap";
 
 function View() {
   const [params] = useSearchParams();
@@ -15,12 +16,14 @@ function View() {
   if (!id) return <Navigate to="/" replace />;
   if(isLoading)  return <LoadingSpinner />;
   if(error) return <Alert variant='danger'>선택하신 상품이 존재하지 않습니다</Alert>;
-  console.log(data.data);
+  
   const {images, info, name, price, productId, reviewCount, star, stock, reviews} = data.data;
   return (
     <div>
       <>
-        {images && images.map((image,idx)=><img key={idx} style={{width:200}} src={`http://localhost:8080${image}`} />) }
+        {
+          images && images.map((image,idx)=><img key={idx} style={{width:200}} src={image} />) 
+        }
         <div className="read-title mb-2">{name}</div>
         <div className="mb-3" style={{display:'flex', justifyContent:'space-between'}}>
           <span className='read-value'>{data.writer}</span>
