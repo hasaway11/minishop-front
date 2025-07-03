@@ -5,7 +5,6 @@ import { Alert } from "react-bootstrap";
 import { readProducts } from "../utils/product-api ";
 import Item from "../components/product/Item";
 import Paginations from "../components/product/Paginations";
-import { useAuthStore } from "../stores/useAuthStore";
 
 function AllProductList() {
   const [params] = useSearchParams();

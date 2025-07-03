@@ -1,12 +1,12 @@
 import { Alert } from "react-bootstrap";
 import { convertToInt } from "../../utils/constants";
-import { readProduct } from "../../utils/product-api";
 import { Navigate, useSearchParams } from "react-router-dom";
 
 import useSWR from "swr";
 import DOMPurify from 'dompurify';
 import ReviewList from "../../components/review/ReviewList";
 import LoadingSpinner from "../../components/common/LoadingSpinner";
+import { readProduct } from '../../utils/product-api '
 
 function View() {
   const [params] = useSearchParams();

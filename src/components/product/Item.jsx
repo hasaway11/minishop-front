@@ -1,4 +1,16 @@
+import { requestAddToCart } from "../../utils/cart-api"
+
 function Item({product}) {
+  const addToCart=async()=>{
+    try {
+      const response = await requestAddToCart(product.id);
+      alert(`장바구니에 ${response.data}개 담았습니다`);
+    } catch(err) {
+      console.log(err);
+      alert(err.response.data);
+    }
+  }
+
   return (
     <div className="card" style={{width:300}}>
       <a href={`/product/view?id=${product.id}`}>
@@ -7,7 +19,7 @@ function Item({product}) {
       <div className="card-body">
         <h6 className="card-title">{product.name}</h6>
         <h5 className="card-text">{product.price}원</h5>
-        <a href="#" class="btn btn-primary">장바구니</a>
+        <button className="btn btn-primary" onClick={addToCart}>장바구니</button>
       </div>
   </div>
   )

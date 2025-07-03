@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import api from "../lib/axiosInstance";
+import { idAvailableCheck } from "../utils/account-api";
 
 const pattern =  /^[0-9a-z]{6,10}$/;
 
@@ -18,7 +18,7 @@ function useUsername(availableCheck=false) {
     } 
     if (availableCheck) {
       try {
-        await api.get(`/api/members/check-username?username=${value}`);
+        await idAvailableCheck(value);
         return true;
       } catch (err) {
         setMessage('사용할 수 없는 아이디입니다');
