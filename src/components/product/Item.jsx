@@ -14,7 +14,7 @@ function Item({product}) {
   return (
     <div className="card" style={{width:300}}>
       <a href={`/product/view?id=${product.id}`}>
-        <img className="card-img-top" src={`http://localhost:8080/api/images/${product.image}`} alt="Card image" style={{width:'100%'}} />
+        <img className="card-img-top" src={product.image} alt="Card image" style={{width:'100%'}} />
       </a>
       <div className="card-body">
         <h6 className="card-title">{product.name}</h6>

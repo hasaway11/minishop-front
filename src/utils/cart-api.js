@@ -11,3 +11,5 @@ export const requestDecreaseQuantity=(id)=>api.put(`/api/carts/${id}/dec`);
 export const requestRemoveItem=(id)=>api.delete(`/api/carts/${id}`);
 
 export const requestRemoveSelectedItems=(ids)=>api.delete(`/api/carts?${ids}`);
+
+export const requestOrderSelectedItems=(ids)=>api.post(`/api/orders/prepare?${ids}`); 

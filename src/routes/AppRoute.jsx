@@ -27,7 +27,7 @@ import Modify from '../pages/product/Modify';
 import Register from '../pages/product/Register';
 import SellerView from '../pages/product/SellerView';
 
-import Order from '../pages/seller/Order';
+import CheckOut from '../pages/member/CheckOut';
 import SellerProductList from '../pages/seller/SellerProductList';
 
 
@@ -47,12 +47,13 @@ function AppRoute() {
       <Route path="/mypage/review/writable" element={<MemberRoute element={<ReviewWritable/>} />} />
       <Route path="/mypage/review/writed" element={<MemberRoute element={<ReviewWrited/>} />} />
       <Route path="/cart/cartlist" element={<MemberRoute element={<CartList/>} />} />
+      <Route path="/order/checkout" element={<MemberRoute element={<CheckOut/>} />} />
       <Route path="/product/view" element={<View/>} />
       <Route path="/seller/product/list" element={<SellerRoute element={<SellerProductList/>} />} />
       <Route path="/seller/product/register" element={<SellerRoute element={<Register/>} />} />
       <Route path="/seller/product/modify" element={<SellerRoute element={<Modify/>} />} />
       <Route path="/seller/product/view" element={<SellerRoute element={<SellerView/>} />} />
-      <Route path="/seller/order" element={<SellerRoute element={<Order/>} />} />
+      <Route path="/seller/order" element={<SellerRoute element={<CheckOut/>} />} />
     </Routes>
   )
 }

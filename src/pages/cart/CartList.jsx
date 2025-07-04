@@ -1,11 +1,13 @@
-import { fetchCarts, requestDecreaseQuantity, requestIncreaseQuantity, requestRemoveItem, requestRemoveSelectedItems } from "../../utils/cart-api";
+import { fetchCarts, requestDecreaseQuantity, requestIncreaseQuantity, requestOrderSelectedItems, requestRemoveItem, requestRemoveSelectedItems } from "../../utils/cart-api";
 import LoadingSpinner from "../../components/common/LoadingSpinner";
 import { Alert } from "react-bootstrap";
 import { useState } from "react";
 import useSWR from "swr";
+import { useNavigate } from "react-router-dom";
 
 function CartList() {
   const [ids, setIds] = useState([]);
+  const navigate = useNavigate();
   const {data, error, isLoading, mutate } = useSWR('carts', ()=>fetchCarts(), { revalidateOnFocus: false} );
 
   if(isLoading)  return <LoadingSpinner />;
@@ -38,9 +40,28 @@ function CartList() {
   const removeItem = (id)=>handleCartUpdate(()=>requestRemoveItem(id));
   
   const removeSelectedItems = ()=>{
+    if(ids.length==0) {
+      alert("삭제할 상품을 선택해주세요");
+      return;
+    }
     const query = ids.map(id => `ids=${id}`).join('&');
     handleCartUpdate(()=>requestRemoveSelectedItems(query));
   };
+
+  const orderSelectedItems=async()=>{
+    if(ids.length==0) {
+      alert("구매할 상품을 선택해주세요");
+      return;
+    }
+    const query = ids.map(id => `ids=${id}`).join('&');
+    try {
+      const response = requestOrderSelectedItems(query);
+      navigate(`/order/checkout?order_id=${response.data}`);
+    } catch(err) {
+      alert("주문에 실패했습니다");
+      console.log(err);
+    }
+  }
 
   return (
     <>
@@ -76,7 +97,7 @@ function CartList() {
           <div>최종결계예상금액:{cartTotalPrice}원</div>
           <div >
             <button onClick={removeSelectedItems} className="btn btn-warning">선택 삭제</button>&nbsp;&nbsp;&nbsp;
-            <button className="btn btn-success">선택 주문</button>
+            <button className="btn btn-success" onClick={orderSelectedItems}>선택 주문</button>
           </div>
         </>
       )}

@@ -11,17 +11,13 @@ export const useAuthInit = () => {
   useEffect(()=>{
     setLoading(true);
     const data = loadAuthData();
-    console.log("=================================");
-    console.log(data);
     if (data)
       setAuth(data);
 
     // 액세스 토큰이 있을 경우에만 체크
     if(data && data.accessToken) {
-      console.log("토큰 확인 :", data);
       api.get('/api/check').then(res=>{
         // 토큰이 현재 유효함. 할일 없음
-        console.log("유효")
       }).catch(err=>{
         if(!err.response) {
           // 네트워크 오류. 응답이 없다
@@ -30,10 +26,8 @@ export const useAuthInit = () => {
         } else if(err.response.status===401) {
           clearAuthData();
           useAuthStore.getState().clearAuth();  
-          console.log("무효")
         } else {
           setError(`오류 발생 : ${err.response.status}`)
-          console.log("제너럴 오류")
         }
       }).finally(()=>{
         setLoading(false);
