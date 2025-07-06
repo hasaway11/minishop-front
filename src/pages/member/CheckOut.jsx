@@ -1,14 +1,15 @@
 import useSWR from "swr";
-import { fetchOrderCheck } from "../../utils/order-api";
+import { createOrder, fetchOrderCheck } from "../../utils/order-api";
 import LoadingSpinner from "../../components/common/LoadingSpinner";
 import { Alert } from "react-bootstrap";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useRef } from "react";
 import BlockButton from "../../components/common/BlockButton";
 
 function CheckOut() {
   const [searchParams] = useSearchParams();
   const orderId = searchParams.get('order_id');
+  const navigate = useNavigate();
 
   const postcodeRef = useRef(null);
   const roadAddressRef = useRef(null);
@@ -28,7 +29,9 @@ function CheckOut() {
       alert('배송지를 검색하세요')
     }
     const address = roadAddressRef.current.value + " " + address2.current.value;
-    
+    const zipcode = postcodeRef.current.value;
+    const id = orderId;
+    createOrder({id, zipcode, address}).then(()=>navigate(`/mypage/orders`, {replace:true})).catch(err=>console.log(err));
   }
 
   const {data, error, isLoading, mutate } = useSWR('checkout', ()=>fetchOrderCheck(orderId), { revalidateOnFocus: false} );
@@ -36,8 +39,9 @@ function CheckOut() {
   if(isLoading)  return <LoadingSpinner />;
   if(error) return <Alert variant='danger'>오류 발생</Alert>;
 
-  const {orderTotalPrice, orderItems} = data.data;
-  
+  const {orderTotalPrice, orders} = data.data;
+  console.log(orders);
+
   return (
     <>
       <div className="mt-3 mb-3">
@@ -59,16 +63,16 @@ function CheckOut() {
       </div>        
       <hr/>
       <div className='mt-3 mb-3'>
-        <Alert variant="success">주문상품 {orderItems.length}개</Alert>
+        <Alert variant="success">주문상품 {orders.length}개</Alert>
         <table className="table table-border">
           <tbody>
             {
-              orderItems.map(item=>{
+              orders.map((item,idx)=>{
                 return (
-                  <tr key={item.id}>
+                  <tr key={idx}>
                     <td><img src={item.image} style={{height:120}} /></td>
-                    <td>{item.name} (수량:{item.quantity}개)</td>
-                    <td>{item.totalPrice}원</td>
+                    <td className='align-middle'>{item.name} (수량:{item.quantity}개)</td>
+                    <td className='align-middle'>{item.totalPrice}원</td>
                   </tr>
                 )
               })

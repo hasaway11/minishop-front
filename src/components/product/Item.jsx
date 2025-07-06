@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { requestAddToCart } from "../../utils/cart-api"
 
 function Item({product}) {
@@ -13,9 +14,9 @@ function Item({product}) {
 
   return (
     <div className="card" style={{width:300}}>
-      <a href={`/product/view?id=${product.id}`}>
+      <Link to={`/product/view?id=${product.id}`}>
         <img className="card-img-top" src={product.image} alt="Card image" style={{width:'100%'}} />
-      </a>
+      </Link>
       <div className="card-body">
         <h6 className="card-title">{product.name}</h6>
         <h5 className="card-text">{product.price}원</h5>

@@ -55,7 +55,7 @@ function CartList() {
     }
     const query = ids.map(id => `ids=${id}`).join('&');
     try {
-      const response = requestOrderSelectedItems(query);
+      const response = await requestOrderSelectedItems(query);
       navigate(`/order/checkout?order_id=${response.data}`);
     } catch(err) {
       alert("주문에 실패했습니다");

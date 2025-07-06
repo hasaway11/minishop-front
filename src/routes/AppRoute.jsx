@@ -15,8 +15,8 @@ import SellerPreSignupEmailAuth from '../pages/account/SellerPreSignupEmailAuth'
 
 import CartList from '../pages/cart/CartList';
 
-import MyPage from '../pages/member/MyPage';
-import MyOrder from '../pages/member/MyOrder';
+import MyOrderList from '../pages/member/MyOrderList';
+import MyOrderView from '../pages/member/MyOrderView';
 import AllProductList from '../pages/AllProductList';
 import ReviewWrited from '../pages/member/ReviewWrited';
 import PasswordCheck from '../pages/member/PasswordCheck';
@@ -42,8 +42,8 @@ function AppRoute() {
       <Route path="/account/search/id" element={<PublicRoute element={<SearchId/>} />} />
       <Route path="/account/search/password" element={<PublicRoute element={<SearchPassword/>} />} />
       <Route path="/mypage/check" element={<PrivateRoute element={<PasswordCheck/>} />} />
-      <Route path="/mypage/read" element={<PrivateRoute element={<MyPage/>} />} />
-      <Route path="/mypage/order" element={<MemberRoute element={<MyOrder/>} />} />
+      <Route path="/mypage/orders" element={<MemberRoute element={<MyOrderList/>} />} />
+      <Route path="/mypage/orders/view" element={<MemberRoute element={<MyOrderView/>} />} />
       <Route path="/mypage/review/writable" element={<MemberRoute element={<ReviewWritable/>} />} />
       <Route path="/mypage/review/writed" element={<MemberRoute element={<ReviewWrited/>} />} />
       <Route path="/cart/cartlist" element={<MemberRoute element={<CartList/>} />} />
