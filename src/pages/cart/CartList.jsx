@@ -70,10 +70,12 @@ function CartList() {
         <>
           <table className="table table-border">
             <thead>
-              <th></th>
-              <th>상품정보</th>
-              <th>구매수량</th>
-              <th>구매예정금액</th>
+              <tr>
+                <th></th>
+                <th>상품정보</th>
+                <th>구매수량</th>
+                <th>구매예정금액</th>
+              </tr>
             </thead>
             <tbody>
             {

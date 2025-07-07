@@ -6,12 +6,11 @@ import { Link } from "react-router-dom";
 
 
 function OrderElement({order}) {
-  const {id,status, orderTime, name, count} = order;
+  console.log(order);
+  const {id,orderTotalPrice, orderAt, name, count} = order;
   return (
     <>
-      {status==='COMPLETE' && <Alert variant="seconary">주문번호 {order.id} - 배송완료 ({orderTime})</Alert>}
-      {status==='SHIPPING' && <Alert variant="primary">주문번호 :{order.id} - 배송중 {orderTime} 주문</Alert>}
-      {status==='PAY' && <Alert variant="success">주문번호 {order.id} - 결제완료 : {orderTime} 주문</Alert>}
+      <Alert variant="secondary">주문 - {orderAt} (결제금액 {orderTotalPrice}원)</Alert>
       <div style={{textAlign:'right'}}>
         {name}외 {count}건 <Link to={`/mypage/orders/view?id=${id}`}>전제 상품보기</Link>
       </div>
