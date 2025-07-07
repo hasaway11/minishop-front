@@ -15,7 +15,7 @@ export const memberSignup = (formData)=>api.post('/api/members/new', formData);
 
 export const sellerSignup = (object)=>api.post('/api/sellers/new', new URLSearchParams(object));
 
-export const findId = (email)=>api.get(`/api/account/username?email=${email}`);
+export const findId = (email)=>api.get(`/api/accounts/username?email=${email}`);
 
 export const checkPassword = (password)=>api.get(`/api/members/check-password?password=${password}`);
 

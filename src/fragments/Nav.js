@@ -34,7 +34,7 @@ function Nav() {
             <li><Link to="/cart/cartlist">장바구니</Link></li>
             <li><Link to="/mypage/review/writable">작성할 리뷰</Link></li>
             <li><Link to="/mypage/review/writed">작성한 리뷰</Link></li>
-            <li><Link to="/order/checkout">주문</Link></li>
+            <li><Link to="/mypage/orders">주문</Link></li>
             <li><Link to="#" onClick={handleLogout}>로그아웃</Link></li>
           </ul>
         </nav>
@@ -45,7 +45,7 @@ function Nav() {
           <ul>
             <li><Link to="/seller/product/list">내 상품</Link></li>
             <li><Link to="/seller/product/register">상품등록</Link></li>
-            <li><Link to="/seller/order">내 주문</Link></li>
+            <li><Link to="/seller/order/list">주문 목록</Link></li>
             <li><Link to="#" onClick={handleLogout}>로그아웃</Link></li>
           </ul>
         </nav>

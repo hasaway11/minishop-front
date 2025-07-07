@@ -29,10 +29,8 @@ function Login() {
       return;
     }
     const requestObject = {username:vUsername.value, password:vPassword.value};
-    console.log(requestObject);
     try {
       const response = await api.post('/api/login', new URLSearchParams(requestObject));
-      console.log(response.data);
       saveAuthData(response.data);
       setAuth(response.data);
       setStatus(AsyncStatus.SUCCESS);

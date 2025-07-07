@@ -29,6 +29,7 @@ import SellerView from '../pages/product/SellerView';
 
 import CheckOut from '../pages/member/CheckOut';
 import SellerProductList from '../pages/seller/SellerProductList';
+import SellerOrderList from '../pages/seller/SellerOrderList';
 
 
 function AppRoute() {
@@ -53,7 +54,7 @@ function AppRoute() {
       <Route path="/seller/product/register" element={<SellerRoute element={<Register/>} />} />
       <Route path="/seller/product/modify" element={<SellerRoute element={<Modify/>} />} />
       <Route path="/seller/product/view" element={<SellerRoute element={<SellerView/>} />} />
-      <Route path="/seller/order" element={<SellerRoute element={<CheckOut/>} />} />
+      <Route path="/seller/order/list" element={<SellerRoute element={<SellerOrderList/>} />} />
     </Routes>
   )
 }

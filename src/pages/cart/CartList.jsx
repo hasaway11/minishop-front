@@ -69,6 +69,12 @@ function CartList() {
       {data.data.items.length>0 && (
         <>
           <table className="table table-border">
+            <thead>
+              <th></th>
+              <th>상품정보</th>
+              <th>구매수량</th>
+              <th>구매예정금액</th>
+            </thead>
             <tbody>
             {
               items.map(item=>{

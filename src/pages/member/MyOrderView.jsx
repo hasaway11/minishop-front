@@ -8,11 +8,12 @@ function MyOrderView() {
   const [searchParams] = useSearchParams();
   const id = searchParams.get('id');
   
-  const {data, error, isLoading} = useSWR("orders", ()=>fetchOrderDetail(id));
+  const {data, error, isLoading} = useSWR("order", ()=>fetchOrderDetail(id));
 
   if(isLoading)  return <LoadingSpinner />;
   if(error) return <Alert variant='danger'>오류 발생</Alert>;
 
+  console.log(data.data);
   const {address, orderAt, devliveryAt, orderTotalPrice, status, orderItems} = data.data;
 
   return (

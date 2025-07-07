@@ -6,6 +6,7 @@ import useEmail from "../../hooks/useEmail";
 import TextField from "../../components/common/TextField";
 import BlockButton from "../../components/common/BlockButton";
 import AlertMessage from "../../components/common/AlertMessage";
+import { Alert } from "react-bootstrap";
 
 function SearchId() {
  // 1. 필요한 기능 가져오기(작성 상태, 이메일 입력 커스텀 훅, 아이디 검색 결과 상태)
@@ -43,11 +44,11 @@ function SearchId() {
 
   return (
     <div>
-      <h1>아이디 찾기</h1>
-      <AlertMessage visible={status===AsyncStatus.SUCCESS} variant='success' message={`당신의 아이디 : ${username}`} />
-      <AlertMessage visible={status===AsyncStatus.FAIL} variant='danger' message='아이디를 찾지 못했습니다' />
-      <div style={{height:200}}>
+      <h1>아이디 찾기</h1>      
+      <div style={{height:200}}>        
         <TextField label='이메일' name='email' value={vEmail.value} message={vEmail.message} onChange={vEmail.onChange} onBlur={handleBlur} />
+        {(status===AsyncStatus.SUCCESS) && <Alert variant='success'>{`당신의 아이디 : ${username}`}</Alert>}
+        {(status===AsyncStatus.FAIL) && <Alert variant='danger'>아이디를 찾지 못했습니다</Alert>}
       </div>
       <BlockButton label={status===AsyncStatus.SUBMITTING ? "찾는 중..." : "아이디 찾기"} onClick={handleFindId} styleName='dark' disabled={status===AsyncStatus.SUBMITTING} />
     </div>

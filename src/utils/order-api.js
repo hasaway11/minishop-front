@@ -7,3 +7,7 @@ export const fetchOrderList = ()=>api.get(`/api/orders`);
 export const fetchOrderDetail = (id)=>api.get(`/api/orders/${id}`);
 
 export const createOrder = (object)=>api.post('/api/orders', new URLSearchParams(object));
+
+export const fetchSellerOrderList = ()=>api.get('/api/sellers/orders');
+
+export const updateSellerOrderStatus = (object)=>api.put('/api/sellers/orders', object);
