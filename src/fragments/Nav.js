@@ -32,8 +32,7 @@ function Nav() {
           <ul>
             <li><Link to="/" style={{color:'white'}}>HOME</Link></li>
             <li><Link to="/cart/cartlist">장바구니</Link></li>
-            <li><Link to="/mypage/review/writable">작성할 리뷰</Link></li>
-            <li><Link to="/mypage/review/writed">작성한 리뷰</Link></li>
+            <li><Link to="/mypage/reviews">작성한 리뷰</Link></li>
             <li><Link to="/mypage/orders">주문</Link></li>
             <li><Link to="#" onClick={handleLogout}>로그아웃</Link></li>
           </ul>

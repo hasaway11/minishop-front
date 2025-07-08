@@ -20,7 +20,6 @@ import MyOrderView from '../pages/member/MyOrderView';
 import AllProductList from '../pages/AllProductList';
 import ReviewWrited from '../pages/member/ReviewWrited';
 import PasswordCheck from '../pages/member/PasswordCheck';
-import ReviewWritable from '../pages/member/ReviewWritable';
 
 import View from '../pages/product/View';
 import Modify from '../pages/product/Modify';
@@ -30,12 +29,13 @@ import SellerView from '../pages/product/SellerView';
 import CheckOut from '../pages/member/CheckOut';
 import SellerProductList from '../pages/seller/SellerProductList';
 import SellerOrderList from '../pages/seller/SellerOrderList';
+import ReviewWrite from '../pages/member/ReviewWrite';
 
 
 function AppRoute() {
   return (
     <Routes>
-      <Route path="/" element={<AllProductList/>} />
+      <Route path="/" element={<AllProductList />} />
       <Route path="/account/member/signup" element={<PublicRoute element={<MemberSignup/>} />} />
       <Route path="/account/seller/signup-check" element={<PublicRoute element={<SellerPreSignupEmailAuth/>} />} />
       <Route path="/account/seller/signup" element={<PublicRoute element={<SellerSignup/>} />} />
@@ -45,8 +45,8 @@ function AppRoute() {
       <Route path="/mypage/check" element={<PrivateRoute element={<PasswordCheck/>} />} />
       <Route path="/mypage/orders" element={<MemberRoute element={<MyOrderList/>} />} />
       <Route path="/mypage/orders/view" element={<MemberRoute element={<MyOrderView/>} />} />
-      <Route path="/mypage/review/writable" element={<MemberRoute element={<ReviewWritable/>} />} />
-      <Route path="/mypage/review/writed" element={<MemberRoute element={<ReviewWrited/>} />} />
+      <Route path="/mypage/reviews" element={<MemberRoute element={<ReviewWrited/>} />} />
+      <Route path="/mypage/review/write" element={<MemberRoute element={<ReviewWrite />} />} />
       <Route path="/cart/cartlist" element={<MemberRoute element={<CartList/>} />} />
       <Route path="/order/checkout" element={<MemberRoute element={<CheckOut/>} />} />
       <Route path="/product/view" element={<View/>} />
