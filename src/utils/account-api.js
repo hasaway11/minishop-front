@@ -35,3 +35,8 @@ export const checkVerifyCode = (object)=>api.post('/api/email-verification/check
 export const sellerSignup = (object)=>api.post('/api/sellers/new', new URLSearchParams(object));
 
 export const readSellerInfo = ()=>api.delete('/api/sellers');
+
+
+
+export const fetchMyInfo=()=>api.get(주소).then(res => res.data);
+export const fetchMyOrders=()=>api.get(주소).then(res => res.data);

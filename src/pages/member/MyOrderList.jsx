@@ -26,7 +26,7 @@ function MyOrderList() {
   if(error) return <Alert variant='danger'>오류 발생</Alert>;
 
   const orderList = data.data;
-  console.log(orderList);
+
   return (
     <div>
       <hr/>

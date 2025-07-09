@@ -40,7 +40,6 @@ function CheckOut() {
   if(error) return <Alert variant='danger'>오류 발생</Alert>;
 
   const {orderTotalPrice, orders} = data.data;
-  console.log(orders);
 
   return (
     <>

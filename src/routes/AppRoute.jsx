@@ -30,6 +30,7 @@ import CheckOut from '../pages/member/CheckOut';
 import SellerProductList from '../pages/seller/SellerProductList';
 import SellerOrderList from '../pages/seller/SellerOrderList';
 import ReviewWrite from '../pages/member/ReviewWrite';
+import MemberRead from '../pages/member/MemberRead';
 
 
 function AppRoute() {
@@ -50,6 +51,7 @@ function AppRoute() {
       <Route path="/cart/cartlist" element={<MemberRoute element={<CartList/>} />} />
       <Route path="/order/checkout" element={<MemberRoute element={<CheckOut/>} />} />
       <Route path="/product/view" element={<View/>} />
+      <Route path="/test" element={<MemberRead />} />
       <Route path="/seller/product/list" element={<SellerProductList/>} />
       <Route path="/seller/product/register" element={<SellerRoute element={<Register/>} />} />
       <Route path="/seller/product/modify" element={<SellerRoute element={<Modify/>} />} />
