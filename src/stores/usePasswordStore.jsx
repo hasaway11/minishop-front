@@ -3,7 +3,7 @@ import { create } from "zustand";
 const usePasswordStore = create((set) => ({
   isPasswordVerified: false,
 
-  setPasswordVerified: () => set(state=>({isPasswordVerified: true })),
+  setPasswordVerified: () => set({isPasswordVerified: true }),
 }));
 
 export default usePasswordStore

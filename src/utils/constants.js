@@ -16,3 +16,5 @@ export const convertToInt=(param, result)=>{
   const num = parseInt(param, 10);
   return (num >= 1) ? num : result;
 };
+
+export const ratingMessage = ["아쉬워요!", "그저 그래요!", "보통이에요!" , "좋아요!",  "아주 좋아요!"];

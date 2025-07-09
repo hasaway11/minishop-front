@@ -2,7 +2,7 @@ import axios from "axios";
 import { useAuthStore } from "../stores/useAuthStore";
 import { getRefreshToken, updateAccessToken } from "../stores/authStorage";
 import { navigate } from "./navigate";
-import { tokenRefresh } from "../utils/account-api";
+import { requestRefreshToken } from "../utils/account-api";
 
 const api = axios.create({baseURL: "http://localhost:8080"});
 
@@ -29,7 +29,7 @@ api.interceptors.response.use(
         if(!refreshToken) {
           navigate('/account/login');
         }
-        const res = await tokenRefresh(refreshToken);
+        const res = await requestRefreshToken(refreshToken);
         const newAccessToken = res.data;
 
         // 갱신된 토큰 저장

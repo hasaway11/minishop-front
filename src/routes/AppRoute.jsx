@@ -18,7 +18,7 @@ import CartList from '../pages/cart/CartList';
 import MyOrderList from '../pages/member/MyOrderList';
 import MyOrderView from '../pages/member/MyOrderView';
 import AllProductList from '../pages/AllProductList';
-import ReviewWrited from '../pages/member/ReviewWrited';
+import MyReviewList from '../pages/member/MyReviewList';
 import PasswordCheck from '../pages/member/PasswordCheck';
 
 import View from '../pages/product/View';
@@ -45,12 +45,12 @@ function AppRoute() {
       <Route path="/mypage/check" element={<PrivateRoute element={<PasswordCheck/>} />} />
       <Route path="/mypage/orders" element={<MemberRoute element={<MyOrderList/>} />} />
       <Route path="/mypage/orders/view" element={<MemberRoute element={<MyOrderView/>} />} />
-      <Route path="/mypage/reviews" element={<MemberRoute element={<ReviewWrited/>} />} />
+      <Route path="/mypage/reviews" element={<MemberRoute element={<MyReviewList/>} />} />
       <Route path="/mypage/review/write" element={<MemberRoute element={<ReviewWrite />} />} />
       <Route path="/cart/cartlist" element={<MemberRoute element={<CartList/>} />} />
       <Route path="/order/checkout" element={<MemberRoute element={<CheckOut/>} />} />
       <Route path="/product/view" element={<View/>} />
-      <Route path="/seller/product/list" element={<SellerRoute element={<SellerProductList/>} />} />
+      <Route path="/seller/product/list" element={<SellerProductList/>} />
       <Route path="/seller/product/register" element={<SellerRoute element={<Register/>} />} />
       <Route path="/seller/product/modify" element={<SellerRoute element={<Modify/>} />} />
       <Route path="/seller/product/view" element={<SellerRoute element={<SellerView/>} />} />

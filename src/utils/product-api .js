@@ -8,7 +8,7 @@ export const readProducts = (pageno)=>api.get(`/api/products?pageno=${pageno}`)
 
 export const readProductsBySeller = (pageno, seller)=>api.get(`/api/products?pageno=${pageno}&seller=${seller}`)
 
-export const readProduct = (id)=>api.get(`/api/products/${id}`)
+export const readProduct = (id)=>api.get(`/api/products/${id}`).then(res => res.data)
 
 export const readProductBySeller = (seller, pageno)=>api.get(`/api/products/${seller}?pageno=${pageno}`)
 
@@ -17,7 +17,3 @@ export const registerProduct = (formData)=>api.post('/api/seller/products/new', 
 // export const readProduct = (productId)=>api.get(`/api/seller/products/${productId}`)
 
 export const blockProduct = (productId)=>api.get(`/api/seller/products/${productId}/block`)
-
-export const writeReview = ()=>{};
-
-export const removeReview = ()=>{};
