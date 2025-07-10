@@ -10,8 +10,10 @@ import BlockButton from '../../components/common/BlockButton';
 import TextField from '../../components/common/TextField';
 import api from '../../lib/axiosInstance';
 import AlertMessage from '../../components/common/AlertMessage';
+import LoadingSpinner from '../../components/common/LoadingSpinner';
 
-function Login() {
+function AccountLogin() {
+  const [dest, setDest] = useState(null);
   const [status, setStatus] = useState(AsyncStatus.IDLE);
   const vUsername = useUsername();
   const vPassword = usePassword();
@@ -28,17 +30,21 @@ function Login() {
       setStatus(AsyncStatus.IDLE);
       return;
     }
-    const requestObject = {username:vUsername.value, password:vPassword.value};
+    const loginRequest = {username:vUsername.value, password:vPassword.value};
+
     try {
-      const response = await api.post('/api/login', new URLSearchParams(requestObject));
+      const response = await api.post('/api/login', new URLSearchParams(loginRequest));
       saveAuthData(response.data);
       setAuth(response.data);
-      setStatus(AsyncStatus.SUCCESS);
-      navigate("/");
+      if(response.data.role==='MEMBER') 
+        navigate('/');
+      else
+        navigate('/seller/product/list')
     } catch(err) {
-      setStatus(AsyncStatus.FAIL);
     }
   };
+
+  if(status===AsyncStatus.SUBMITTING) return <LoadingSpinner />
 
   return (
     <div>
@@ -48,10 +54,10 @@ function Login() {
         <TextField label='아이디' name="username" {...vUsername} />
         <TextField type='password' label='비밀번호' name="password" {...vPassword}/>
       </div>
-      <BlockButton label={status===AsyncStatus.SUBMITTING ? "로그인 중..." : "로그인"} onClick={handleLogin} styleName='primary' disabled={status===AsyncStatus.SUBMITTING} />    
+      <BlockButton label="로그인" onClick={handleLogin} styleName='primary' />    
     </div>
   )
 }
 
-export default Login
+export default AccountLogin
 

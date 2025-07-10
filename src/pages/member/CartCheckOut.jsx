@@ -6,7 +6,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useRef } from "react";
 import BlockButton from "../../components/common/BlockButton";
 
-function CheckOut() {
+function CartCheckOut() {
   const [searchParams] = useSearchParams();
   const orderId = searchParams.get('order_id');
   const navigate = useNavigate();
@@ -91,4 +91,4 @@ function CheckOut() {
   )
 }
 
-export default CheckOut
+export default CartCheckOut

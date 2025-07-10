@@ -6,7 +6,7 @@ export const readMinorCategory = ()=>api.get('/api/categories/minor');
 
 export const readProducts = (pageno)=>api.get(`/api/products?pageno=${pageno}`)
 
-export const readProductsBySeller = (pageno, seller)=>api.get(`/api/products?pageno=${pageno}&seller=${seller}`)
+export const readProductsBySeller = (pageno)=>api.get(`/api/seller/products?pageno=${pageno}`);
 
 export const readProduct = (id)=>api.get(`/api/products/${id}`).then(res => res.data)
 

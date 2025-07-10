@@ -1,5 +1,5 @@
 import 'react-quill-new/dist/quill.snow.css';
-import './Register.css';
+import './ProductRegister.css';
 
 import { useState } from "react";
 import ImageSelector from "../../components/product/ImageSelector"
@@ -15,7 +15,7 @@ import useSWR from 'swr';
 import { Alert } from 'react-bootstrap';
 
 
-function Register() {
+function ProductRegister() {
   const navigate = useNavigate();
   const [status, setStatus] = useState(AsyncStatus.IDLE);
   const [images, setImages] = useState([null, null, null]);
@@ -27,10 +27,8 @@ function Register() {
   const vStock = useInput();
   const vCategory = useInput()
 
-  const isSubmitting = status === AsyncStatus.SUBMITTING;
-
   const handleRegister=async()=>{
-    if(isSubmitting) return;
+    if(status === AsyncStatus.SUBMITTING) return;
     setStatus(AsyncStatus.SUBMITTING);
 
     if(images[0]===null) {
@@ -88,9 +86,9 @@ function Register() {
         {vCategory.message!=='' && <span style={{color:'red'}}>{vCategory.message}</span>}
       </div>
       <ReactQuill theme="snow" name="content" modules={modules}  value={content} onChange={(value)=>setContent(value)}/>
-      <BlockButton label={isSubmitting? "등록 중..." : "상품 등록"} onClick={handleRegister} styleName='primary' disabled={isSubmitting}/>
+      <BlockButton label="상품 등록" onClick={handleRegister} styleName='primary' />
     </div>
   )
 }
 
-export default Register
+export default ProductRegister

@@ -2,7 +2,7 @@ import api from "../lib/axiosInstance";
 
 export const fetchOrderCheck = (orderId)=>api.get(`/api/orders/check?orderId=${orderId}`);
 
-export const fetchOrderList = ()=>api.get(`/api/orders`);
+export const fetchOrderList = ()=>api.get(`/api/orders`).then(res => res.data);
 
 export const fetchOrderDetail = (id)=>api.get(`/api/orders/${id}`);
 

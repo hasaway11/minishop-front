@@ -17,9 +17,6 @@ function SellerPreSignupCheck() {
   const [verifyStatus, setVerifyStatus] = useState(AsyncStatus.IDLE);
   const navigate = useNavigate();
 
-  // const isRequestSuccess = requestStatus===AsyncStatus.SUCCESS;
-  // const isVerifyFail = verifyStatus===AsyncStatus.FAIL;
-
   const handleRequest=async()=>{
     if(requestStatus===AsyncStatus.SUBMITTING) return;
     setRequestStatus(AsyncStatus.SUBMITTING);

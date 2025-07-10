@@ -20,12 +20,9 @@ export const changePassword = (object)=>api.put('/api/accounts/password', new UR
 
 export const memberSignup = (formData)=>api.post('/api/members/new', formData);
 
-export const readme = ()=>api.get('/api/members');
+export const fetchMyInfo=()=>api.get('/api/members').then(res => res.data);
 
-export const changeProfile = (formData)=>api.put('/api/members/profile', formData)
-
-
-
+export const changeProfile = (formData)=>api.put('/api/members/profile', formData).then(res => res.data)
 
 
 export const requestVerifyCode = (object)=>api.post('/api/email-verification/request', new URLSearchParams(object));
@@ -35,8 +32,3 @@ export const checkVerifyCode = (object)=>api.post('/api/email-verification/check
 export const sellerSignup = (object)=>api.post('/api/sellers/new', new URLSearchParams(object));
 
 export const readSellerInfo = ()=>api.delete('/api/sellers');
-
-
-
-export const fetchMyInfo=()=>api.get(주소).then(res => res.data);
-export const fetchMyOrders=()=>api.get(주소).then(res => res.data);

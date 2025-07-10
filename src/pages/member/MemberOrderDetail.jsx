@@ -5,7 +5,7 @@ import { Alert } from 'react-bootstrap';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import BlockButton from '../../components/common/BlockButton';
 
-function MyOrderView() {
+function MemberOrderDetail() {
   const [searchParams] = useSearchParams();
   const id = searchParams.get('id');
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ function MyOrderView() {
             orderItems.map((item,idx)=>{
               return (
                 <tr key={idx}>
-                  <td><img src={item.image} style={{height:120}} /></td>
+                  <td><img src={item.image} style={{height:100}} /></td>
                   <td className='align-middle'>{item.name} {item.quantity}개</td>
                   <td className='align-middle'>{item.totalPrice}원</td>
                   <td className='align-middle text-center'>
@@ -49,9 +49,9 @@ function MyOrderView() {
           }
         </tbody>
       </table>
-      <BlockButton label='목록으로' onClick={()=>navigate('/mypage/orders')} styleName='primary' />
+      <BlockButton label='목록으로' onClick={()=>navigate('/mypage/check')} styleName='primary' />
     </div>
   )
 }
 
-export default MyOrderView
+export default MemberOrderDetail

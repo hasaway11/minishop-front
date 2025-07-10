@@ -11,9 +11,9 @@ function SellerProductList() {
   const {username} = useAuthStore();
   const [params] = useSearchParams();
 
-  let pageno = params.get('pageno')==null? 1:parseInt(params.get('pageno'));
-  console.log(username);
-  const {data, error, isLoading} = useSWR(['products', pageno], ()=>readProductsBySeller(pageno, username), {revalidateOnFocus: false});
+  const pageno = params.get('pageno')==null? 1:parseInt(params.get('pageno'));
+  const seller = params.get('seller');
+  const {data, error, isLoading} = useSWR(['products', [pageno,seller]], ()=>readProductsBySeller(pageno, seller), {revalidateOnFocus: false});
 
   if(isLoading) return <LoadingSpinner />
   if(error) return <Alert variant='danger'>서버가 응답하지 않습니다</Alert>

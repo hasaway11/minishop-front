@@ -7,6 +7,7 @@ import useUsername from "../../hooks/useUsername";
 import TextField from "../../components/common/TextField";
 import BlockButton from "../../components/common/BlockButton";
 import { Alert } from "react-bootstrap";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 
 function SearchPassword() {
   const [status, setStatus] = useState(AsyncStatus.IDLE);
@@ -24,15 +25,16 @@ function SearchPassword() {
       return;
     }
 
-    const obj = {username:vUsername.value, email:vEmail.value};
+    const searchPasswordForm = {username:vUsername.value, email:vEmail.value};
     try {
-      await resetPassword(obj);
+      await resetPassword(searchPasswordForm);
       setStatus(AsyncStatus.SUCCESS);
     } catch(err) {
       setStatus(AsyncStatus.FAIL);
     }
   }
 
+  if(status===AsyncStatus.SUBMITTING) return <LoadingSpinner />
   return (
     <div>
       <h1>비밀번호 찾기</h1>
@@ -42,7 +44,7 @@ function SearchPassword() {
       <TextField label='이메일' name='email' {...vEmail} />
       {(status===AsyncStatus.SUCCESS) && <Alert variant='success'>임시비밀번호를 이메일로 보냈습니다</Alert>}
       {(status===AsyncStatus.FAIL) && <Alert variant='danger'>사용자 정보를 확인하지 못했습니다</Alert>}
-      <BlockButton label={status===AsyncStatus.SUBMITTING ? "찾는 중...":"비밀번호 찾기"} onClick={handleResetUsername} styleName='dark' disabled={status===AsyncStatus.SUBMITTING} />
+      <BlockButton label="비밀번호 찾기" onClick={handleResetUsername} styleName='dark' />
     </div>
   )
 }

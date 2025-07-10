@@ -10,7 +10,7 @@ import ReactQuill from "react-quill-new";
 import BlockButton from "../../components/common/BlockButton";
 
 
-function Modify() {
+function ProductModify() {
  // 필요한 기능 가져오기(작성 상태, 제목 커스텀 훅, 내용 상태, 라우팅, 로그인 이름)
   const [status, setStatus] = useState(AsyncStatus.IDLE);
   const vPrice = useInput();
@@ -24,8 +24,6 @@ function Modify() {
   let productId = convertToInt(params.get('product_id'), null);
   const {data, error, isLoading } = useSWR(['productId', productId], ()=>read(productId));
 
-  const isSubmitting = status === AsyncStatus.SUBMITTING;
-
   // 변경할 수 있는 제목과 내용 상태를 변경
   useEffect(() => {
     if (data) {
@@ -37,7 +35,7 @@ function Modify() {
 
   // 글 변경
   const handleUpdate =async()=>{
-    if (isSubmitting) return;
+    if (status === AsyncStatus.SUBMITTING) return;
     setStatus(AsyncStatus.SUBMITTING);
 
     const r1 = vPrice.onBlur();
@@ -67,9 +65,9 @@ function Modify() {
       <TextField label='가격' name='price' {...vPrice} />
       <TextField label='재고' name='stock' {...vStock} />
       <ReactQuill theme="snow" name="content" modules={{modules}}  value={content} onChange={(value)=>setContent(value)}/>
-      <BlockButton label={isSubmitting? "변경 중...":"변 경"} onClick={handleUpdate} styleName='primary' disabled={isSubmitting}/>
+      <BlockButton label="변경하기" onClick={handleUpdate} styleName='primary'/>
     </>
   )
 }
 
-export default Modify
+export default ProductModify

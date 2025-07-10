@@ -24,10 +24,8 @@ function SellerSignup() {
   const vRepresentative = useInput();
   const vAddress = useInput();
 
-  const isSubmitting = status === AsyncStatus.SUBMITTING;
-
   const handleSellerSignup=async()=>{
-    if(isSubmitting) return;
+    if(status === AsyncStatus.SUBMITTING) return;
     setStatus(AsyncStatus.SUBMITTING);
 
     const r1 = await vUsername.onBlur();
@@ -43,10 +41,9 @@ function SellerSignup() {
       return;
     }    
 
-    const obj = {username:vUsername.value, password:vPassword.value, email:vEmail.value, companyName:vCompanyName.value, representative:vRepresentative.value, address:vAddress.value};
-
+    const sellerSignupForm = {username:vUsername.value, password:vPassword.value, email:vEmail.value, companyName:vCompanyName.value, representative:vRepresentative.value, address:vAddress.value};
     try {
-      await sellerSignup(obj);
+      await sellerSignup(sellerSignupForm );
       setStatus(AsyncStatus.SUCCESS);
       navigate("/account/login");
     } catch(err) {
@@ -72,7 +69,7 @@ function SellerSignup() {
       <TextField label="사업체 이름" name="company-name" {...vCompanyName} />
       <TextField label="대표자 이름" name="representative" {...vRepresentative} />
       <TextField label="사업체 주소" name="address" {...vAddress} />
-      <BlockButton label={isSubmitting? "가입 처리 중...":"회원 가입"} onClick={handleSellerSignup} styleName='primary' disabled={isSubmitting}/>
+      <BlockButton label="판매회원 가입" onClick={handleSellerSignup} styleName='primary' />
     </div>
   )
 }

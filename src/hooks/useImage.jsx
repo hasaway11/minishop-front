@@ -17,7 +17,7 @@ function useImage() {
     }
   }, []);
 
-  return {value, previewImage, onChange, setPreviewImage};
+  return {value, previewImage, setPreviewImage, onChange, setPreviewImage};
 }
 
 

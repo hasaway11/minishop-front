@@ -35,7 +35,7 @@ function Review({writeTime, image, name, rating, content}) {
   )
 }
 
-function MyReviewList() {
+function MemberReviewList() {
   const {data, error, isLoading} = useSWR('reviews', ()=>fetchMyReviws(), {revalidateOnFocus: false}) 
 
   if(isLoading)  return <LoadingSpinner />;
@@ -51,4 +51,4 @@ function MyReviewList() {
   )
 }
 
-export default MyReviewList
+export default MemberReviewList

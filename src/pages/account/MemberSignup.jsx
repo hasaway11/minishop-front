@@ -13,6 +13,7 @@ import BlockButton from "../../components/common/BlockButton";
 import useConfirmPassword from "../../hooks/useConfirmPassword";
 import AlertMessage from "../../components/common/AlertMessage";
 import ImageField from "../../components/common/ImageField";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 
 function MemberSignup() {
   const navigate = useNavigate();
@@ -25,10 +26,8 @@ function MemberSignup() {
   const vEmail = useEmail();
   const vBirthDate = useInput();
 
-  const isSubmitting = status === AsyncStatus.SUBMITTING;
-
   const handleMemberSignup=async()=>{
-    if(isSubmitting) return;
+    if(status === AsyncStatus.SUBMITTING) return;
     setStatus(AsyncStatus.SUBMITTING);
 
     const r1 = await vUsername.onBlur();
@@ -59,6 +58,7 @@ function MemberSignup() {
     }
   }
 
+  if(status===AsyncStatus.SUBMITTING) return <LoadingSpinner />
   return (
     <div>
       <h1>회원 가입</h1>
@@ -69,7 +69,7 @@ function MemberSignup() {
       <TextField type='password' label='비밀번호' name='password' {...vPassword} />
       <TextField type='password' label='비밀번호 확인' name='confirm-password' {...vConfirmPassword} />
       <TextField type="date" label="생일" name="birth-date" {...vBirthDate} />
-      <BlockButton label={isSubmitting? "가입 처리 중...":"회원 가입"} onClick={handleMemberSignup} styleName='primary' disabled={isSubmitting}/>
+      <BlockButton label="일반회원 가입" onClick={handleMemberSignup} styleName='primary' />
      </div>
   )
 }

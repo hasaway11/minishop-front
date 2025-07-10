@@ -9,10 +9,12 @@ import Nav from './fragments/Nav';
 import Aside from './fragments/Aside';
 import Footer from './fragments/Footer';
 import AppRoute from './routes/AppRoute';
+import { useAuthStore } from './stores/useAuthStore';
+import { SWRConfig } from 'swr';
 
 function App() {
   const navigate = useNavigate();
-
+  const role = useAuthStore(state=>state.role);
   // useNavigate훅을 생성해서 전역 JS에 저장합니다
   useEffect(() => {
     setNavigate(navigate);
@@ -30,7 +32,9 @@ function App() {
       <main>
         <Aside />
         <section>
-          <AppRoute />
+          <SWRConfig value={{ revalidateOnFocus: false, shouldRetryOnError: false }}>
+            <AppRoute />
+          </SWRConfig>
         </section>
         <Aside />
       </main>

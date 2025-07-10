@@ -4,7 +4,7 @@ import useSWR from "swr";
 import ReviewList from "../../components/review/ReviewList";
 import { Alert } from "bootstrap";
 
-function SellerView() {
+function SellerProductView() {
   // const navigate = useNavigate();
   // const [params] = useSearchParams();
   // let productId = convertToInt(params.get('product_id'), null);
@@ -55,4 +55,4 @@ function SellerView() {
   )
 }
 
-export default SellerView
+export default SellerProductView

@@ -10,7 +10,7 @@ import { readProduct } from '../../utils/product-api '
 import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa6";
 
-function View() {
+function ProductView() {
   const [params] = useSearchParams();
   let id = convertToInt(params.get('id'), null);
   const {data, error, isLoading } = useSWR(['product', id], ()=>readProduct(id), { revalidateOnFocus: false} );
@@ -69,4 +69,4 @@ function View() {
   )
 }
 
-export default View
+export default ProductView

@@ -6,7 +6,6 @@ function SellerRoute({element}) {
   const username = useAuthStore(state=>state.username);
   const role = useAuthStore(state=>state.role);
 
-  console.log("seller route :", role);
   if(username===null) return <Navigate to="/account/login" replace/>
   if(role!=='SELLER') return <Navigate to="/e403" replace />
   return element;
