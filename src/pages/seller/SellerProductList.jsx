@@ -24,7 +24,7 @@ function SellerProductList() {
     <>
       <div style={{display:'flex', flexWrap:'wrap', gap:35, padding:'0 35px'}}>
         {
-          contents.map(product=><Item key={product.id} product={product} />)
+          contents.map(product=><Item key={product.id} product={product} isOrderable={false} />)
         }
       </div>
       <Paginations pageno={pageno} pagesize={pagesize} totalcount={totalCount} blocksize={5} url="/seller/product/list" />
