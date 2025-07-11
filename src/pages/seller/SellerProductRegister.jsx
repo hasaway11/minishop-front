@@ -1,5 +1,6 @@
+
 import 'react-quill-new/dist/quill.snow.css';
-import './ProductRegister.css';
+import './SellerProductRegister.css';
 
 import { useState } from "react";
 import ImageSelector from "../../components/product/ImageSelector"
@@ -15,7 +16,7 @@ import useSWR from 'swr';
 import { Alert } from 'react-bootstrap';
 
 
-function ProductRegister() {
+function SellerProductRegister() {
   const navigate = useNavigate();
   const [status, setStatus] = useState(AsyncStatus.IDLE);
   const [images, setImages] = useState([null, null, null]);
@@ -91,4 +92,4 @@ function ProductRegister() {
   )
 }
 
-export default ProductRegister
+export default SellerProductRegister

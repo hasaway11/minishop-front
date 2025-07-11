@@ -14,6 +14,5 @@ export const readProductBySeller = (seller, pageno)=>api.get(`/api/products/${se
 
 export const registerProduct = (formData)=>api.post('/api/seller/products/new', formData)
 
-// export const readProduct = (productId)=>api.get(`/api/seller/products/${productId}`)
+export const readMyProduct = (productId)=>api.get(`/api/seller/products/${productId}`).then(res => res.data);
 
-export const blockProduct = (productId)=>api.get(`/api/seller/products/${productId}/block`)

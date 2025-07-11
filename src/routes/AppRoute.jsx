@@ -26,8 +26,8 @@ import ProductView from '../pages/member/ProductView';
 
 
 import SellerProductList from '../pages/seller/SellerProductList';
-import ProductRegister from '../pages/seller/ProductRegister';
-import ProductModify from '../pages/seller/ProductModify';
+import SellerProductRegister from '../pages/seller/SellerProductRegister';
+import SellerProductModify from '../pages/seller/SellerProductModify';
 import SellerProductView from '../pages/seller/SellerProductView';
 import SellerOrderList from '../pages/seller/SellerOrderList';
 import NotFound from "../pages/NotFound";
@@ -57,8 +57,8 @@ function AppRoute() {
       <Route path="/product/view" element={<ProductView/>} />
 
       <Route path="/seller/product/list" element={<SellerRoute element={<SellerProductList/>} />} />
-      <Route path="/seller/product/register" element={<SellerRoute element={<ProductRegister/>} />} />
-      <Route path="/seller/product/modify" element={<SellerRoute element={<ProductModify/>} />} />
+      <Route path="/seller/product/register" element={<SellerRoute element={<SellerProductRegister/>} />} />
+      <Route path="/seller/product/modify" element={<SellerRoute element={<SellerProductModify/>} />} />
       <Route path="/seller/product/view" element={<SellerRoute element={<SellerProductView/>} />} />
       <Route path="/seller/order/list" element={<SellerRoute element={<SellerOrderList/>} />} />
 

@@ -4,8 +4,8 @@ import useSWR from "swr";
 import LoadingSpinner from "../../components/common/LoadingSpinner";
 import { Alert } from "react-bootstrap";
 import { readProductsBySeller } from "../../utils/product-api ";
-import Item from "../../components/product/Item";
 import Paginations from "../../components/product/Paginations";
+import Item from "../../components/product/Item";
 
 function SellerProductList() {
   const {username} = useAuthStore();
