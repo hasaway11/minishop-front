@@ -40,7 +40,7 @@ function CartList() {
   const removeItem = (id)=>handleCartUpdate(()=>requestRemoveItem(id));
   
   const removeSelectedItems = ()=>{
-    if(ids.length==0) {
+    if(ids.length===0) {
       alert("삭제할 상품을 선택해주세요");
       return;
     }
@@ -49,7 +49,7 @@ function CartList() {
   };
 
   const orderSelectedItems=async()=>{
-    if(ids.length==0) {
+    if(ids.length===0) {
       alert("구매할 상품을 선택해주세요");
       return;
     }
@@ -83,10 +83,10 @@ function CartList() {
                 return (
                   <tr key={item.id}>
                     <td><input type='checkbox' value={item.id} onChange={handleChange} /></td>
-                    <td><img src={item.image} style={{height:120}} /></td>
+                    <td><img src={item.image} style={{height:120}} alt={item.name} /></td>
                     <td>{item.name}</td>
                     <td>
-                      <button disabled={item.quantity==1} onClick={()=>decreaseQuantity(item.id)} className="btn btn-primary">-</button>
+                      <button disabled={item.quantity===1} onClick={()=>decreaseQuantity(item.id)} className="btn btn-primary">-</button>
                       <span style={{fontWeight:'bold'}}> {item.quantity} </span>
                       <button onClick={()=>increaseQuantity(item.id)} className="btn btn-primary">+</button>
                     </td>

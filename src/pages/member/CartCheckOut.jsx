@@ -8,7 +8,7 @@ import BlockButton from "../../components/common/BlockButton";
 
 function CartCheckOut() {
   const [searchParams] = useSearchParams();
-  const orderId = searchParams.get('order_id');
+  const tempOrderId = searchParams.get('order_id');
   const navigate = useNavigate();
 
   const postcodeRef = useRef(null);
@@ -24,17 +24,23 @@ function CartCheckOut() {
     }).open();
   };
 
-  const handleOrder=()=>{
-    if(roadAddressRef.current.value=='' || address2.current.value=='') {
+  const handleOrder=async ()=>{
+    if(roadAddressRef.current.value==='' || address2.current.value==='') {
       alert('배송지를 검색하세요')
     }
     const address = roadAddressRef.current.value + " " + address2.current.value;
     const zipcode = postcodeRef.current.value;
-    const id = orderId;
-    createOrder({id, zipcode, address}).then(()=>navigate(`/mypage/orders`, {replace:true})).catch(err=>console.log(err));
+    const id = tempOrderId;
+    try {
+      const orderId = await createOrder({id, zipcode, address});
+      navigate(`/member/order?id=${orderId}`, {replace:true});
+      return;
+    } catch(err) {
+      console.log(err);
+    }
   }
 
-  const {data, error, isLoading, mutate } = useSWR('checkout', ()=>fetchOrderCheck(orderId), { revalidateOnFocus: false} );
+  const {data, error, isLoading} = useSWR('checkout', ()=>fetchOrderCheck(tempOrderId), { revalidateOnFocus: false} );
 
   if(isLoading)  return <LoadingSpinner />;
   if(error) return <Alert variant='danger'>오류 발생</Alert>;
@@ -69,7 +75,7 @@ function CartCheckOut() {
               orders.map((item,idx)=>{
                 return (
                   <tr key={idx}>
-                    <td><img src={item.image} style={{height:120}} /></td>
+                    <td><img src={item.image} style={{height:120}} alt={item.name} /></td>
                     <td className='align-middle'>{item.name} (수량:{item.quantity}개)</td>
                     <td className='align-middle'>{item.totalPrice}원</td>
                   </tr>

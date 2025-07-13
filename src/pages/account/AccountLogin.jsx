@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AsyncStatus } from '../../utils/constants'
 import { useNavigate } from 'react-router-dom';
 import { saveAuthData } from '../../stores/authStorage';
@@ -13,12 +13,13 @@ import AlertMessage from '../../components/common/AlertMessage';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 
 function AccountLogin() {
-  const [dest, setDest] = useState(null);
   const [status, setStatus] = useState(AsyncStatus.IDLE);
   const vUsername = useUsername();
   const vPassword = usePassword();
   const navigate = useNavigate();
   const setAuth = useAuthStore(state=>state.setAuth);
+
+  useEffect(()=>{setStatus(AsyncStatus.IDLE);}, [])
 
   const handleLogin=async()=>{
     if(status===AsyncStatus.SUBMITTING) return;
@@ -41,6 +42,10 @@ function AccountLogin() {
       else
         navigate('/seller/product/list')
     } catch(err) {
+      console.log(err);
+      if(err.response.status===401) {
+        setStatus(AsyncStatus.FAIL);
+      }
     }
   };
 

@@ -21,13 +21,13 @@ function useUsername(availableCheck=false) {
         await idAvailableCheck(value);
         return true;
       } catch (err) {
-        setMessage('사용할 수 없는 아이디입니다');
+        setMessage('사용중인 아이디입니다');
         console.log(err);
         return false;
       }
     } 
     return true;
-  }, [value]);
+  }, [value, availableCheck]);
   
   return { value, message, onChange, onBlur };
 }

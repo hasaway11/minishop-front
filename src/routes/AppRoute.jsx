@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes} from "react-router-dom"
 
 import PublicRoute from './PublicRoute';
 import MemberRoute from './MemberRoute';
@@ -27,7 +27,6 @@ import ProductView from '../pages/member/ProductView';
 
 import SellerProductList from '../pages/seller/SellerProductList';
 import SellerProductRegister from '../pages/seller/SellerProductRegister';
-import SellerProductModify from '../pages/seller/SellerProductModify';
 import SellerProductView from '../pages/seller/SellerProductView';
 import SellerOrderList from '../pages/seller/SellerOrderList';
 import NotFound from "../pages/NotFound";
@@ -42,7 +41,7 @@ function AppRoute() {
       <Route path="/account/seller/signup-check" element={<PublicRoute element={<SellerPreSignupEmailAuth/>} />} />
       <Route path="/account/seller/signup" element={<PublicRoute element={<SellerSignup/>} />} />
 
-      <Route path="/account/login" element={<AccountLogin/>} />
+      <Route path="/account/login" element={<AccountLogin />} />
       <Route path="/account/search/id" element={<PublicRoute element={<SearchId/>} />} />
       <Route path="/account/search/password" element={<PublicRoute element={<SearchPassword/>} />} />
 
@@ -58,7 +57,6 @@ function AppRoute() {
 
       <Route path="/seller/product/list" element={<SellerRoute element={<SellerProductList/>} />} />
       <Route path="/seller/product/register" element={<SellerRoute element={<SellerProductRegister/>} />} />
-      <Route path="/seller/product/modify" element={<SellerRoute element={<SellerProductModify/>} />} />
       <Route path="/seller/product/view" element={<SellerRoute element={<SellerProductView/>} />} />
       <Route path="/seller/order/list" element={<SellerRoute element={<SellerOrderList/>} />} />
 

@@ -3,7 +3,6 @@ import { fetchOrderDetail } from '../../utils/order-api';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import { Alert } from 'react-bootstrap';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import BlockButton from '../../components/common/BlockButton';
 
 function MemberOrderDetail() {
   const [searchParams] = useSearchParams();
@@ -34,7 +33,7 @@ function MemberOrderDetail() {
             orderItems.map((item,idx)=>{
               return (
                 <tr key={idx}>
-                  <td><img src={item.image} style={{height:100}} /></td>
+                  <td><img src={item.image} style={{height:100}} alt={item.name}/></td>
                   <td className='align-middle'>{item.name} {item.quantity}개</td>
                   <td className='align-middle'>{item.totalPrice}원</td>
                   <td className='align-middle text-center'>
@@ -49,7 +48,6 @@ function MemberOrderDetail() {
           }
         </tbody>
       </table>
-      <BlockButton label='목록으로' onClick={()=>navigate('/mypage/check')} styleName='primary' />
     </div>
   )
 }

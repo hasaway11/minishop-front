@@ -9,19 +9,18 @@ import Nav from './fragments/Nav';
 import Aside from './fragments/Aside';
 import Footer from './fragments/Footer';
 import AppRoute from './routes/AppRoute';
-import { useAuthStore } from './stores/useAuthStore';
 import { SWRConfig } from 'swr';
 
 function App() {
   const navigate = useNavigate();
-  const role = useAuthStore(state=>state.role);
-  // useNavigate훅을 생성해서 전역 JS에 저장합니다
+
+  // useNavigate훅을 생성해서 전역 JS에 저장
   useEffect(() => {
     setNavigate(navigate);
   }, [navigate]);
 
   // 로컬 스토리지의 인증 정보를 store에 복사
-  const {error, loading} = useAuthInit();
+  const {loading} = useAuthInit();
 
   if(loading) return <div>⏳ 로그인 상태 확인 중...</div>;
   
